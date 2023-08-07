@@ -1,0 +1,8 @@
+# CoffeeMachine
+Máquina de café com possibilidade de expansões e integração.
+- Na primeira versão é criada a aplicação básica para controle de uma máquina de café com algumas opções de bebidas.
+A interface é o console.
+
+- Na segunda versão é implementada uma interface gráfica.
+
+- Na terceira versão é implementado um banco de dados para coleta de dados de consumo.
