@@ -1,10 +1,23 @@
 package CoffeeMachineV2;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public abstract class Drink {
+public class Drink {
+	
+	ArrayList<String> drinksOptions = new ArrayList<String>();
+	
+	public Drink() {
+		drinksOptions.add("Espresso");
+		drinksOptions.add("Espresso com leite");
+		drinksOptions.add("Capuccino");
+	}
 
-	public static int selectDrink() {
+	public String getSelection(int drinksSelection) {
+		return drinksOptions.get(drinksSelection);
+	}
+	
+	public int selectDrink() {
 		System.out.println("Selecione sua bebida:");
 		System.out.println("Digite 1 para Espresso");
 		System.out.println("Digite 2 para Espresso com leite");
@@ -19,7 +32,7 @@ public abstract class Drink {
 		return selection - 1;
 	}
 	
-	private static void improveDrink(int selection) {
+	private void improveDrink(int selection) {
 		Scanner in = new Scanner(System.in);
 		
 		switch (selection) {
@@ -42,7 +55,7 @@ public abstract class Drink {
 		in.close();
 	}
 	
-	private static void coffeeWithMilk(int p) {
+	private void coffeeWithMilk(int p) {
 		switch (p) {
 		case 1: Dispenser.dose(3,1,0,0);
 			break;
