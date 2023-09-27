@@ -1,68 +1,84 @@
 package CoffeeMachineV2;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
-public class Drink {
+public class Drink{
+	private static int intensity = 0;
+	private static boolean chosedDrink = false;
 	
-	ArrayList<String> drinksOptions = new ArrayList<String>();
-	
-	public Drink() {
-		drinksOptions.add("Espresso");
-		drinksOptions.add("Espresso com leite");
-		drinksOptions.add("Capuccino");
+	public Drink(String drink) {
+		switch (drink) {
+		case "Espresso": {
+			chosedDrink = true;
+			improveDrink(1);
+			break;
+		}
+		case "Espresso com leite": {
+			chosedDrink = true;
+			improveDrink(2);
+			break;
+		}
+		case "Capuccino": {
+			chosedDrink = true;
+			improveDrink(3);
+			break;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + drink);
+		}
 	}
-
-	public String getSelection(int drinksSelection) {
-		return drinksOptions.get(drinksSelection);
+	
+	public static boolean getChosedDrink() {
+		return chosedDrink;
 	}
 	
-	public int selectDrink() {
-		System.out.println("Selecione sua bebida:");
-		System.out.println("Digite 1 para Espresso");
-		System.out.println("Digite 2 para Espresso com leite");
-		System.out.println("Digite 3 para Capuccino");
-		
-		Scanner in = new Scanner(System.in);
-		int selection = in.nextInt();
+	public static void setMoreIntensity() {
+		intensity++;		
+	}
 	
-		improveDrink(selection);
-		
-		in.close();
-		return selection - 1;
+	public static void setLessIntensity() {
+		intensity--;		
+	}
+	
+	public static int getIntensity() {
+		return intensity;
 	}
 	
 	private void improveDrink(int selection) {
-		Scanner in = new Scanner(System.in);
-		
+		getintensity();
 		switch (selection) {
-		case 1:
-			System.out.println("Selecione a intensidade do seu café: 1, 2 ou 3");
-			int i = in.nextInt();
-			Dispenser.dose(i,0,0,0);
-			break;
-		case 2:
-			System.out.println("Selecione a proporção café/leite:");
-			System.out.println("1 = mais café, 2 = média, 3 = mais leite");
-			int p = in.nextInt();
-			coffeeWithMilk(p);
-			break;
-		case 3:
-			Dispenser.dose(2,1,1,1);
-			break;
+			case 1: {
+				System.out.println("Selecione a intensidade do seu café: 1, 2 ou 3");
+				
+				getIntensity();
+				if (i == 0) {
+					System.out.println("error");
+					break;
+				}
+				Dispenser.ingredients(i,0,0,0);
+				break;
+			}
+			case 2: {
+				System.out.println("Selecione a proporção café/leite:");
+				System.out.println("1 = mais café, 2 = média, 3 = mais leite");
+				int p = getIntensity();
+				coffeeWithMilk(p);
+				break;
+			}
+			case 3: {
+				Dispenser.ingredients(2,1,1,1);
+				break;
+			}
 		}
-		
-		in.close();
 	}
 	
 	private void coffeeWithMilk(int p) {
 		switch (p) {
-		case 1: Dispenser.dose(3,1,0,0);
+		case 1: Dispenser.ingredients(3,1,0,0);
 			break;
-		case 2: Dispenser.dose(2,2,0,0);
+		case 2: Dispenser.ingredients(2,2,0,0);
 			break;
-		case 3: Dispenser.dose(1,3,0,0);
+		case 3: Dispenser.ingredients(1,3,0,0);
 			break;
 		}
 	}
+
 }
