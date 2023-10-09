@@ -15,9 +15,9 @@ public abstract class Dispenser {
 	}
 	
 	public static void makeADrink() {
-		if (Drink.getChosedDrink()) {
+		if (Drink.getDrink() != 0) {
 			dose(coffee, milk, chocolate, boiledMilk);
-		}
+		}	
 	}
 
 	private static void dose(int coffee,int milk,int chocolate,int boiledMilk) {
@@ -25,6 +25,7 @@ public abstract class Dispenser {
 		doseMilk(milk);
 		doseChocolate(chocolate);
 		doseBoiledMilk(boiledMilk);
+		setMachine();
 	}
 	
 	private static void doseCoffee(int i) {
@@ -76,7 +77,8 @@ public abstract class Dispenser {
 		}
 	}
 
-	private static void setCoffee(int coffee) {
+	protected static void setCoffee(int coffee) {
+		
 		Dispenser.coffee = coffee;
 	}
 
@@ -92,5 +94,9 @@ public abstract class Dispenser {
 		Dispenser.boiledMilk = boiledMilk;
 	}
 	
+	private static void setMachine() {
+		Drink.setDrink();
+		DrinkIntensity.setIntensity();
+	}
 	
 }

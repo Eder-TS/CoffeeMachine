@@ -36,7 +36,7 @@ public class MyWindow {
 	public MyWindow() {
 		initialize();
 	}
-
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -58,7 +58,7 @@ public class MyWindow {
 		frmCoffeeMachine.getContentPane().add(btnEspresso);
 		btnEspresso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                new Drink("Espresso");
+                Drink.improveDrink(1);
             }
         });
 		
@@ -68,7 +68,7 @@ public class MyWindow {
 		frmCoffeeMachine.getContentPane().add(btnEspressoWithMilk);
 		btnEspressoWithMilk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	new Drink("Espresso com leite");
+            	Drink.improveDrink(2);
             }
         });
 		
@@ -79,7 +79,7 @@ public class MyWindow {
 		frmCoffeeMachine.getContentPane().add(btnCapuccino);
 		btnCapuccino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	new Drink("Capuccino");
+            	Drink.improveDrink(3);
             }
         });
 		
@@ -88,12 +88,21 @@ public class MyWindow {
 		lblDrinkIntensity.setBounds(24, 159, 145, 14);
 		frmCoffeeMachine.getContentPane().add(lblDrinkIntensity);
 		
+		JTextArea textAreaActualIntensity = new JTextArea(String.valueOf(DrinkIntensity.getIntensity()));
+		textAreaActualIntensity.setMargin(new Insets(0, 7, 0, 0));
+		textAreaActualIntensity.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textAreaActualIntensity.setLineWrap(true);
+		textAreaActualIntensity.setBounds(83, 226, 26, 26);
+		frmCoffeeMachine.getContentPane().add(textAreaActualIntensity);
+		textAreaActualIntensity.setText(String.valueOf(DrinkIntensity.getIntensity()));
+		
 		JButton btnMore = new JButton("Mais");
 		btnMore.setBounds(52, 191, 89, 23);
 		frmCoffeeMachine.getContentPane().add(btnMore);
 		btnMore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	Drink.setMoreIntensity();
+            	DrinkIntensity.setMoreIntensity();
+            	textAreaActualIntensity.setText(String.valueOf(DrinkIntensity.getIntensity()));
             }
         });
 		
@@ -102,16 +111,10 @@ public class MyWindow {
 		frmCoffeeMachine.getContentPane().add(btnLess);
 		btnLess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	Drink.setLessIntensity();
+            	DrinkIntensity.setLessIntensity();
+            	textAreaActualIntensity.setText(String.valueOf(DrinkIntensity.getIntensity()));
             }
         });
-		
-		JTextArea textAreaActualIntensity = new JTextArea(String.valueOf(Drink.getIntensity()));
-		textAreaActualIntensity.setMargin(new Insets(0, 7, 0, 0));
-		textAreaActualIntensity.setFont(new Font("Dialog", Font.PLAIN, 18));
-		textAreaActualIntensity.setLineWrap(true);
-		textAreaActualIntensity.setBounds(83, 226, 26, 26);
-		frmCoffeeMachine.getContentPane().add(textAreaActualIntensity);
 		
 		JPanel panelStatusImage = new JPanel();
 		panelStatusImage.setBounds(243, 47, 178, 175);
@@ -124,8 +127,8 @@ public class MyWindow {
 		btnMakeADrink.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Dispenser.makeADrink();
+                textAreaActualIntensity.setText(String.valueOf(DrinkIntensity.getIntensity()));
             }
         });
 	}
-
 }

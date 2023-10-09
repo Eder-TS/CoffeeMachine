@@ -1,0 +1,9 @@
+bebida1 (pressionado) -> chosedDrink(1) -> int chosedDrink = 1 -> enable btn
+bebida2
+bebida3
+
+intensidade1 
+(padrão) intensidade2 ->drinkIntensity(2) -> int drinkIntensity = 2 -> intensityDisplay()
+intensidade3
+
+prepararBebida (pressionado) -> makeADrink(1,2) -> dose(2,0,0,0)
